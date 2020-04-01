@@ -1,6 +1,6 @@
 # Pedagogic Algorithmic Language compiler and runtime
 
-This essentially a reimplementation of the PAL compiler by R. Mabee
+This is essentially a reimplementation of the PAL compiler by R. Mabee
 from 12 June 1970 (written in BCPL, see
 http://www.softwarepreservation.org/projects/lang/PAL). It generally
 follow the original structure. However, the Boehm-Demers-Weiser
