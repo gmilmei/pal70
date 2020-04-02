@@ -1,0 +1,10 @@
+// traditional recursive factorial
+def rec fact x = x = 0 -> 1 ! x * fact (x-1)
+
+// iterative factorial
+def facti x = let y = 1 and z = 1 in
+    while y le x do {
+        z := z * y;
+        y := y + 1
+    };
+    z

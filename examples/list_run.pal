@@ -1,0 +1,25 @@
+// demo program for list.pal
+let a = nil
+and b = nil
+and PrintListLn x = PrintList x; Print '*n'
+and PrintLn x = Print x; Print '*n'
+and ShiftLeft x = 2*x
+and Add x y = x + y
+and Mult x y = x * y
+in 
+    b := Cons 'A' ($b);
+    b := Cons 'B' ($b);
+    a := Cons 10 ($a);
+    a := Cons b ($a);
+    a := Cons 'foo' ($a);
+    a := Cons 20.5 ($a);
+    PrintLn a;
+    PrintListLn a;
+    a := List (1, 2, 3, 4, 5);
+    PrintListLn a;
+    a := MapList ShiftLeft a;
+    PrintListLn a;
+    b := FoldRight Add 0 a;
+    PrintLn b;
+    b := FoldRight Mult 1 a;
+    PrintLn b

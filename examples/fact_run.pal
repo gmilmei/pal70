@@ -1,0 +1,20 @@
+// demo program for fact.pal
+let x = 0 in {
+    while x le 10 do {
+        Print 'fact ';         
+        Print x;
+        Print ' = ';        
+        Print [fact x];
+        Print '*n';
+        x := x+1
+    };
+    x := 0;
+    while x le 10 do {
+        Print 'facti ';         
+        Print x;
+        Print ' = ';        
+        Print [facti x];
+        Print '*n';
+        x := x+1
+    }
+}

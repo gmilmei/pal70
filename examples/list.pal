@@ -1,0 +1,40 @@
+// Lisp-like lists and operations
+
+// list constructors and accessors
+def Cons x y = (x,y)
+and Car (x,y) = x
+and Cdr (x,y) = y
+
+// creates a list from tuple x
+def List x =
+    Null x    -> Cons x nil !
+    Istuple x -> List1 x 1 (Order x) !
+                 Cons x nil
+  where rec List1 t n s = t
+    n = s -> Cons (t n) nil !
+             Cons (t n) (List1 t (n+1) s)
+
+// maps the functions over the list x
+def rec MapList f x =
+    Null x -> x ! {
+        let a = Car x and b = Cdr x in
+            Cons (f a) (MapList f b)
+        }
+
+// reduces the list x using the curried binary function f
+// and unit element u
+def rec FoldRight f u x =
+    Null x -> u ! {
+        let a = Car x and b = Cdr x in
+            f a (FoldRight f u b) 
+        }
+              
+
+// prints the list x in Lisp syntax
+def rec PrintList x =
+    Null x    -> Print '()' !
+    Istuple x -> { Print '('; PL x } !
+                 Print x
+  where rec PL x = let car = Car x and cdr = Cdr x in
+        PrintList car;
+        Null cdr -> Print ')' ! { Print ' '; PL cdr }
