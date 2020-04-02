@@ -1,0 +1,33 @@
+.TH PAL70 1 "28 March 2020" "PAL70 1.0" "User Commands"
+.SH NAME
+pal70 \- PAL compiler and runtime
+
+.SH SYNOPSIS
+.B pal70
+[\fI\,OPTION\/\fR]... \fI\,FILE\/\fR...
+
+.SH DESCRIPTION
+
+A compiler and runtime for the Pedagogic Algorithmic Language.  If
+neither the \fB\-c\fR nor the \fB\-d\fR option is given, the pocode
+code in \fI\,FILE\/\fR is executed. Only the \fB\-c\fR option allows
+multiple files.
+
+.SH OPTIONS
+.TP
+\fB\-c\fR
+compile the PAL source files \fI\,FILE\/\fR...; the output
+is \fBpocode.out\fR, unless the \fB\-o\fR option is given
+.TP
+\fB\-d\fR
+disassemble the pocode in \fI\,FILE\/\fR
+.TP
+\fB\-o \fI\,FILE\/\fR
+the file used instead of \fBpocode.out\fR for the
+compilation output
+.TP
+\fB\-v\fR
+enable verbose mode
+
+.SH AUTHOR
+Written by Gérard Milmeister
