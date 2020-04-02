@@ -21,11 +21,11 @@ and review the compiler flags in `src/Makefile`.
 
 Start build with:
 
-> `make`
+    make
 
 To install:
 
-> `make install`
+    make install
 
 The usual install flags `DESTDIR`, `BINDIR` and `MANDIR` are
 supported.
