@@ -390,7 +390,7 @@ char* token_name(token_type type)
     case T_IFSO:     return "IFSO";
     case T_IN:       return "IN";
     case T_INT:      return "INT";
-    case T_JJ:       return "JJ";            
+    case T_JJ:       return "JJ";
     case T_LAMBDA:   return "LAMBDA";
     case T_LBRACE:   return "LBRACE";
     case T_LBRACKET: return "LBRACKET";

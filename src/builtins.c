@@ -145,13 +145,23 @@ static value* length(value* val, stack* S, value* E)
 static value* lookupinj(value* val, stack* S, value* E)
 {
     val = in(val);
-    if (!value_is_type(val, V_STRING)) {
+    if (!value_is_type(val, V_TUPLE) || value_tuple_size(val) != 2) {
         apply_error("LookupinJ", val, 0);
         return out(make_tuple(0));
     }
-    int n = string_to_ref_if_exists(value_string(val));
+    value* A = value_rvalue(value_tuple_val(val, 0));
+    value* B = value_rvalue(value_tuple_val(val, 1));
+    if (!value_is_type(A, V_STRING)) {
+         apply_error("LookupinJ", val, 0);
+        return out(make_tuple(0));
+    }
+    if (!value_is_type(B, V_JJ)) {
+         apply_error("LookupinJ", val, 0);
+        return out(make_tuple(0));
+    }
+    int n = string_to_ref_if_exists(value_string(A));
     if (n >= 0) {
-        val = env_lookup(n, E);
+        val = env_lookup(n, B->v.jj.env);
         if (val) return val;
     }
     return out(make_tuple(0));
