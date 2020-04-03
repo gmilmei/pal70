@@ -86,6 +86,7 @@ void init_interpreter(BYTE* code, int code_len, char** files)
             program_len++;
             break;
         }
+        case OP_INITNAMES:
         case OP_DECLNAMES: {
             n++;
             int len = decode_int(&code[n]);
@@ -799,14 +800,13 @@ void execute()
             pc++;
             pop(S, A);
             A = value_rvalue(A);
-            if (value_is_type(A, V_TUPLE) && value_tuple_size(A) == n) {
-                for (int i = 0; i < n; i++) {
-                    B = value_tuple_val(A, i);
-                    E = env_bind(refs[i+1], B, E);
-                }
-            }
-            else {
+            if (!value_is_type(A, V_TUPLE) || value_tuple_size(A) != n) {
                 runtime_error("%s", "conformality error in definition");
+                break;
+            }
+            for (int i = 0; i < n; i++) {
+                B = value_tuple_val(A, i);
+                E = env_bind(refs[i+1], B, E);
             }
             break;
         }
@@ -820,8 +820,20 @@ void execute()
             break;
         }
         case OP_INITNAMES: {
+            int* refs = program[pc].args.refs;
+            int n = refs[0];
             pc++;
-            // TODO: not yet implemented
+            pop(S, A);
+            A = value_rvalue(A);
+            if (!value_is_type(A, V_TUPLE) || value_tuple_size(A) != n) {
+                runtime_error("%s", "conformality error in recursive definition");
+                break;
+            }
+            for (int i = 0; i < n; i++) {
+                B = env_lookup(refs[i+1], E);
+                if (!B) B = make_lvalue(nil_rvalue);
+                B->v.value = value_tuple_val(A, i)->v.value;
+            }
             break;
         }
         case OP_DECLLABEL: {

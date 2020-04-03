@@ -189,6 +189,7 @@ void disassemble(FILE* out, BYTE* code, int code_len, char** files)
             fprintf(out, "%6d: [%02x] L%d:\n", line, op, i);
             break;
         }
+        case OP_INITNAMES:
         case OP_DECLNAMES: {
             n++;
             int len = decode_int(&code[n]);

@@ -263,7 +263,8 @@ static void initnames(tree* t)
         out_int(size);
         ssp--;
         for (int i = 0; i < size; i++) {
-            out_name(tree_string(tree_list_element(t, i)));
+            char* name = tree_string(tree_list_element(t, i));
+            out_name(name);
         }
         break;
     }
@@ -397,10 +398,10 @@ static void declnames(tree* t)
         break;
     }
     case S_COMMA: {
-        out_op(OP_DECLNAMES);
         int size = tree_list_size(t);
+        out_op(OP_DECLNAMES);
         out_int(size);
-        ssp = ssp-1;
+        ssp--;
         for (int i = 0; i < size; i++) {
             char* name = tree_string(tree_list_element(t, i));
             out_name(name);
