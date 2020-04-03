@@ -707,6 +707,13 @@ void execute()
                 A = A->v.builtin.fn(B, S, E);
                 push(S, A);
                 break;
+            case V_JJ:
+                pop(S, B);
+                pc = A->v.jj.pc;
+                E = A->v.jj.env;
+                S = A->v.jj.stack;
+                push(S, B);
+                break;
             default:
                 pop(S, B);
                 runtime_error("attempt to apply %v to %v", A, B);
