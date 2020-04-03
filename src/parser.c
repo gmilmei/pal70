@@ -604,6 +604,11 @@ static tree* parse_exp(int n)
         next();
         return apply(res, n);
     }
+    case T_JJ: {
+        res = tree_make(line, S_JJ);
+        next();
+        return apply(res, n);
+    }
     case T_NAME: {
         res = tree_make_name(line, cur_tok.data.string);
         next();

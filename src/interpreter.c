@@ -874,8 +874,9 @@ void execute()
             break;
         }
         case OP_SETUP: {
+            A = make_stack(pc, E, S);
+            push(S, A);
             pc++;
-            /* do nothing */
             break;
         }
         case OP_RES: {
@@ -897,8 +898,9 @@ void execute()
         }
         case OP_JJ: {
             pc++;
-            // TODO: search for STACK value
-            top(S, A);
+            stack* s = S;
+            while (!value_is_type(s->value, V_STACK)) s = S->next;
+            A = s->value;
             A = make_jj(A->v.stack.pc, A->v.stack.env, A->v.stack.stack);
             push(S, A);
             break;

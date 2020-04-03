@@ -193,6 +193,9 @@ void fprintval(FILE* file, value* val, int level, int quote)
     case V_DUMMY:
         fprintf(file, "*dummy*");
         break;
+    case V_JJ:
+        fprintf(file, "*jj*");
+        break;
     case V_TUPLEMAKER:
         fprintf(file, "*tuple*");
         break;

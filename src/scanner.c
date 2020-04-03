@@ -55,6 +55,7 @@ void init_scanner()
     name_table = malloc(name_table_max*sizeof(name_entry*));
 
     /* register keywords */
+    kw("J",      T_JJ);
     kw("and",    T_AND);
     kw("aug",    T_AUG);
     kw("def",    T_DEF);
@@ -70,6 +71,7 @@ void init_scanner()
     kw("ifnot",  T_IFNOT);
     kw("ifso",   T_IFSO);
     kw("in",     T_IN);
+    kw("jj",     T_JJ);
     kw("le",     T_LE);
     kw("let",    T_LET);
     kw("ll",     T_LAMBDA);
@@ -82,8 +84,8 @@ void init_scanner()
     kw("res",    T_RES);
     kw("test",   T_TEST);
     kw("true",   T_TRUE);
-    kw("valof",  T_VALOF);
     kw("val",    T_VALOF);
+    kw("valof",  T_VALOF);
     kw("where",  T_WHERE);
     kw("while",  T_WHILE);
     kw("within", T_WITHIN);
@@ -388,6 +390,7 @@ char* token_name(token_type type)
     case T_IFSO:     return "IFSO";
     case T_IN:       return "IN";
     case T_INT:      return "INT";
+    case T_JJ:       return "JJ";            
     case T_LAMBDA:   return "LAMBDA";
     case T_LBRACE:   return "LBRACE";
     case T_LBRACKET: return "LBRACKET";

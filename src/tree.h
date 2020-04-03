@@ -25,6 +25,7 @@ typedef enum {
     S_GOTO,
     S_GR,
     S_INT,
+    S_JJ,
     S_LAMBDA,
     S_LE,
     S_LET,

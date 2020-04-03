@@ -701,6 +701,11 @@ static void trans(tree* t, trans_mode mode)
         up_ssp(1);
         if (mode == MODE_REF) out_op(OP_FORMLVALUE);
         break;
+    case S_JJ:
+        out_op(OP_JJ);
+        up_ssp(1);
+        if (mode == MODE_REF) out_op(OP_FORMLVALUE);
+        break;
     case S_REAL:
         out_op(OP_LOADF);
         out_real(tree_real(t));

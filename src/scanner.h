@@ -27,6 +27,7 @@ typedef enum {
     T_IFSO,
     T_IN,
     T_INT,
+    T_JJ,
     T_LAMBDA,
     T_LBRACE,
     T_LBRACKET,

@@ -167,6 +167,9 @@ void print_tree(FILE* f, tree* t, int i)
         fin(f, i+1);
         fprintf(f, "%ld\n", tree_integer(t));
         break;
+    case S_JJ:
+        fln(f, i, "JJ");
+        break;
     case S_LAMBDA:
         fln(f, i, "LAMBDA");
         print_tree(f, tree_left(t), i+1);
