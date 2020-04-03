@@ -9,8 +9,7 @@ have been made to bring the language more in line with the PAL
 reference manual (Arthur Evans, MIT, February 1968), such as built-in
 functions and the equivalent use of the (), [], and {} bracket pairs,
 while retaining language extensions, such as the `while`, `if`, `test`
-constructs, though the `JJ` operation, and thus the `val` or `valof`
-constructs, are not yet supported.
+constructs.
 
 ## Building and installing
 
@@ -29,3 +28,9 @@ To install:
 
 The usual install flags `DESTDIR`, `BINDIR` and `MANDIR` are
 supported.
+
+## References
+
+* Software Preservation Group: http://www.softwarepreservation.org/projects/lang/PAL
+
+* Wikipedia: https://en.wikipedia.org/wiki/PAL_(programming_language)
