@@ -7,7 +7,7 @@ OPTFLAGS=-O2
 all: pal70
 
 pal70:
-	${MAKE} -C src pal70 OPTFLAGS=${OPTFLAGS}
+	${MAKE} -C src pal70 OPTFLAGS="${OPTFLAGS}"
 
 install: all
 	mkdir -p $(DESTDIR)$(BINDIR)
