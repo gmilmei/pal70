@@ -55,3 +55,4 @@ dkms.conf
 examples/*.pocode
 pal70*.tar.gz
 src/TAGS
+src/pal70

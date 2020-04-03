@@ -1,0 +1,35 @@
+builtins.o: builtins.c builtins.h value.h config.h stack.h error.h \
+ strings.h
+code.o: code.c code.h config.h
+disassembler.o: disassembler.c disassembler.h config.h code.h
+error.o: error.c error.h value.h config.h builtins.h
+interpreter.o: interpreter.c builtins.h value.h config.h code.h error.h \
+ interpreter.h stack.h strings.h
+list.o: list.c list.h
+main.o: main.c config.h error.h value.h parser.h tree.h list.h \
+ translator.h disassembler.h interpreter.h code.h
+pal70.o: pal70.c config.h error.h value.h parser.h tree.h list.h \
+ translator.h disassembler.h interpreter.h code.h
+parser.o: parser.c parser.h tree.h config.h list.h scanner.h error.h \
+ value.h
+scanner.o: scanner.c error.h value.h config.h scanner.h
+stack.o: stack.c stack.h value.h config.h
+strings.o: strings.c strings.h
+translator.o: translator.c translator.h tree.h config.h list.h error.h \
+ value.h code.h
+tree.o: tree.c tree.h config.h list.h
+value.o: value.c strings.h value.h config.h
+builtins.o: builtins.h value.h config.h
+code.o: code.h config.h
+config.o: config.h
+disassembler.o: disassembler.h config.h
+error.o: error.h value.h config.h
+interpreter.o: interpreter.h config.h
+list.o: list.h
+parser.o: parser.h tree.h config.h list.h
+scanner.o: scanner.h
+stack.o: stack.h value.h config.h
+strings.o: strings.h
+translator.o: translator.h tree.h config.h list.h
+tree.o: tree.h config.h list.h
+value.o: value.h config.h
