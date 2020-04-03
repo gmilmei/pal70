@@ -27,8 +27,7 @@ def rec FoldRight f u x =
     Null x -> u ! {
         let a = Car x and b = Cdr x in
             f a (FoldRight f u b) 
-        }
-              
+        }              
 
 // prints the list x in Lisp syntax
 def rec PrintList x =
