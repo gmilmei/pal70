@@ -67,9 +67,9 @@ char* op_string(op op)
 
 }
 
-static void out_op(FILE* out, int addr, BYTE op)
+static void out_op(FILE* out, int addr, int line, BYTE op)
 {
-    fprintf(out, "%04x: [%02x] %s", addr, op, op_string(op));
+    fprintf(out, "%6d: [%02x] %s", line, op, op_string(op));
 }
 
 static void out_ln(FILE* out)
@@ -108,14 +108,19 @@ static void out_string(FILE* out, char* s)
 void disassemble(FILE* out, BYTE* code, int code_len, char** files)
 {
     int n = 0;
+    int old_filenr = -1;
     while (n < code_len) {
         op op = code[n];
         int addr = n++;
         int line = decode_int(&code[n]);
         n += 3;
-        char* file_name = files[line>>24];
+        int filenr = line>>24;
+        char* file_name = files[filenr];
         line = line&0xFFFFFF;
-        if (0) fprintf(out, "%s: %d\n", file_name, line);
+        if (filenr != old_filenr) {
+            fprintf(out, "source %s:\n", file_name);
+            old_filenr = filenr;
+        }
         switch (op) {
         case OP_SETLABES:
         case OP_PARAM:
@@ -125,7 +130,7 @@ void disassemble(FILE* out, BYTE* code, int code_len, char** files)
             n++;
             int i = decode_int(&code[n]);
             n += 4;
-            out_op(out, addr, op);
+            out_op(out, addr, line, op);
             out_integer(out, i);
             out_ln(out);
             break;
@@ -134,7 +139,7 @@ void disassemble(FILE* out, BYTE* code, int code_len, char** files)
             n++;
             INTEGER i = decode_integer(&code[n]);
             n += 8;
-            out_op(out, addr, op);
+            out_op(out, addr, line, op);
             out_integer(out, i);
             out_ln(out);
             break;
@@ -143,7 +148,7 @@ void disassemble(FILE* out, BYTE* code, int code_len, char** files)
             n++;
             REAL real = decode_real(&code[n]);
             n += 8;
-            out_op(out, addr, op);
+            out_op(out, addr, line, op);
             out_real(out, real);
             out_ln(out);
             break;
@@ -160,7 +165,7 @@ void disassemble(FILE* out, BYTE* code, int code_len, char** files)
             char s[len+1];
             decode_string(&code[n], s, len);
             n += len;
-            out_op(out, addr, op);
+            out_op(out, addr, line, op);
             out_string(out, s);
             out_ln(out);
             break;
@@ -171,7 +176,7 @@ void disassemble(FILE* out, BYTE* code, int code_len, char** files)
             n += 4;
             int N = decode_int(&code[n]);
             n += 4;
-            out_op(out, addr, op);
+            out_op(out, addr, line, op);
             out_integer(out, L);
             out_integer(out, N);
             out_ln(out);
@@ -181,14 +186,14 @@ void disassemble(FILE* out, BYTE* code, int code_len, char** files)
             n++;
             int i = decode_int(&code[n]);
             n += 4;
-            fprintf(out, "%04x: [%02x] L%d:\n", addr, op, i);
+            fprintf(out, "%6d: [%02x] L%d:\n", line, op, i);
             break;
         }
         case OP_DECLNAMES: {
             n++;
             int len = decode_int(&code[n]);
             n += 4;
-            out_op(out, addr, op);
+            out_op(out, addr, line, op);
             for (int i = 0; i < len; i++) {
                 int slen = decode_int(&code[n]);
                 n += 4;
@@ -204,7 +209,7 @@ void disassemble(FILE* out, BYTE* code, int code_len, char** files)
             n++;
             int i = decode_int(&code[n]);
             n += 4;
-            out_op(out, addr, op);
+            out_op(out, addr, line, op);
             out_integer(out, i);
             out_ln(out);
             break;
@@ -212,7 +217,7 @@ void disassemble(FILE* out, BYTE* code, int code_len, char** files)
         default:
             /* operations with no arguments */
             n++;
-            out_op(out, addr, op); out_ln(out);
+            out_op(out, addr, line, op); out_ln(out);
             break;
         }
     }
