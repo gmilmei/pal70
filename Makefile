@@ -18,7 +18,7 @@ install: all
 
 tar: clean
 	mkdir -p ${NAME}
-	cp -a AUTHORS examples LICENSE Makefile man README.md src ${NAME}
+	cp -a AUTHORS emacs examples LICENSE Makefile man README.md src ${NAME}
 	tar zcf ${NAME}.tar.gz --owner=0 --group=0 ${NAME}
 	rm -rf ${NAME}
 
