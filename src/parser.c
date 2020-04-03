@@ -300,11 +300,7 @@ static tree* parse_def_cont(int n)
     int line = line();
     if (at(T_NAME)) {
         tree* names = parse_names();
-        if (!names) {
-            // TODO: error
-            return 0;
-        }
-        else if (names->type == S_COMMA) {
+        if (names->type == S_COMMA) {
             /* tuple name valdef */
             if (!at(T_VALDEF)) error(line(), "missing '='");
             next();
@@ -321,8 +317,8 @@ static tree* parse_def_cont(int n)
 
         /* function definition */
         list* params = parse_params();
-        // TODO: error if params->len == 0
-        // TODO: test for VALDEF
+        if (params->len == 0) error(line(), "no parameters");
+        if (!at(T_VALDEF)) error(line(), "missing '='");
         next();
         tree* body = parse_com(0);
         for (int i = params->len-1; i >= 0; i--) {
@@ -621,7 +617,6 @@ static tree* parse_exp(int n)
             else
                 error(line(), "symbol out of context");
             return 0;
-            // TODO: n <= 8
         }
         return apply(res, n);
     }
